@@ -22,8 +22,16 @@ sudo cp ${BASEDIR}/hotspot-conf/dnsmasq.conf /etc/dnsmasq.conf
 sudo cp ${BASEDIR}/hotspot-conf/hostapd.conf  /etc/hostapd/hostapd.conf
 sudo cp ${BASEDIR}/hotspot-conf/hostapd /etc/default/hostapd
 
-sudo update-alternatives --set iptables /usr/sbin/iptables-legacy
 sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
 
-sudo apt-get -y install bridge-utils
+echo "dhcpcd.conf..."
+cp /etc/dhcpcd.conf ${BASEDIR}/bak/
+cp ${BASEDIR}/bak/dhcpcd.conf ${BASEDIR}/hotspot-conf/
+
+isconfigured=`grep "#hotspot_config_flag" ${BASEDIR}/hotspot-conf/dhcpcd.conf | wc -l`
+if [ ${isconfigured} -eq 0 ]
+then
+    echo "add new DHCPCD configuration..."
+    cat $BASEDIR/hotspot-conf/dhcpcd.ap.conf >> $BASEDIR/hotspot-conf/dhcpcd.conf
+fi
