@@ -1,15 +1,13 @@
-auto br0
-#iface br0 inet static
-iface br0 inet manual
-#	address 192.168.1.14
-#	broadcast 192.168.1.255
-#	netmask 255.255.255.0
+auto wlan0 
+iface wlan0 inet static
+	address 192.168.0.10
+	netmask 255.255.255.0
 #	gateway 192.168.1.1
 	# If the resolvconf package is installed, you should not edit 
         # the resolv.conf configuration file manually. Set name server here
         #dns-nameservers 192.168.2.254
         # If you have muliple interfaces such as eth0 and eth1
-        bridge_ports wlan0 eth0
+#        bridge_ports wlan0 eth0
 #	bridge_stp off       # disable Spanning Tree Protocol
 #       bridge_waitport 0    # no delay before a port becomes available
 #       bridge_fd 0          # no forwarding delay

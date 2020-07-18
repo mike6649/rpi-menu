@@ -16,8 +16,8 @@ sudo cp $BASEDIR/hotspot-conf/br0 /etc/network/interfaces.d/
 echo "Updated DHCPCD configuration..."
 sudo cp $BASEDIR/hotspot-conf/dhcpcd.conf /etc/dhcpcd.conf
 
-echo "Adding br0 bridge..."
-sudo brctl addbr br0
+
+sudo cp $BASEDIR/hotspot-conf/wpa_supplicant.conf /etc/wpa_supplicant/
+
 echo "The machine will reboot now."
-sudo brctl addif br0 eth0
 sudo reboot
